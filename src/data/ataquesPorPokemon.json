@@ -1,0 +1,26 @@
+{
+  "charmander": [
+    "ataque_aranazo",
+    "ataque_ascuas",
+    "ataque_cuchillada",
+    "ataque_giro_fuego"
+  ],
+  "squirtle": [
+    "ataque_placaje",
+    "ataque_pistola_agua",
+    "ataque_burbuja",
+    "ataque_mordisco"
+  ],
+  "pikachu": [
+    "ataque_impactrueno",
+    "ataque_rapido",
+    "ataque_rayo",
+    "ataque_golpe_cuerpo"
+  ],
+  "bulbasaur": [
+    "ataque_placaje",
+    "ataque_latigo_cepa",
+    "ataque_hoja_afilada",
+    "ataque_bomba_germen"
+  ]
+}
