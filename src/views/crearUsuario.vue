@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router"
@@ -54,4 +55,18 @@ async function registrar() {
 
   <p v-if="error">{{ error }}</p>
   <p v-if="exito">¡Usuario creado! Redirigiendo al login...</p>
+=======
+<template>
+  <h1>Crear usuario</h1>
+
+  <form>
+    <label for="nuevoUsuario">Usuario</label>
+    <input id="nuevoUsuario" type="text" />
+
+    <label for="nuevaPassword">Contraseña</label>
+    <input id="nuevaPassword" type="password" />
+
+    <button type="submit">Crear cuenta</button>
+  </form>
+>>>>>>> 46c57bb7f2762c17d222688b4930940a9a55777f
 </template>

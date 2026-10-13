@@ -1,9 +1,14 @@
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+<<<<<<< HEAD
 import { validarLogin } from "@/services/usuariosApi"
 
 const router = useRouter()
+=======
+
+const router = useRouter()  
+>>>>>>> 46c57bb7f2762c17d222688b4930940a9a55777f
 const usuario = ref("")
 const password = ref("")
 const isLoading = ref(false)
@@ -21,10 +26,15 @@ async function iniciarSesion() {
 
     if (usuarioValido) {
       loginExitoso.value = true
+<<<<<<< HEAD
       localStorage.setItem("isLoggedIn", "true")
       localStorage.setItem("usuario", usuarioValido.first_name)
       // redirige a la selección de pokemon
       router.push("/seleccionPokemon")
+=======
+      localStorage.setItem('isLoggedIn', 'true')
+      router.push('/seleccionPokemon')
+>>>>>>> 46c57bb7f2762c17d222688b4930940a9a55777f
     } else {
       error.value = "Usuario o contraseña incorrectos."
     }
@@ -38,6 +48,10 @@ async function iniciarSesion() {
 function irACrearUsuario() {
   router.push("/crearUsuario")
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 46c57bb7f2762c17d222688b4930940a9a55777f
 </script>
 
 <template>
@@ -53,6 +67,12 @@ function irACrearUsuario() {
     <button type="submit" :disabled="isLoading">
       Ingresar
     </button>
+
+    <button type="button" @click="irACrearUsuario">
+    Crear usuario
+    </button>
+
+
   </form>
 
   <p v-if="error">{{ error }}</p>
