@@ -1,27 +1,35 @@
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import { validarLogin } from "@/services/usuariosApi"
 
-const router = useRouter()  
+const router = useRouter()
 const usuario = ref("")
 const password = ref("")
 const isLoading = ref(false)
 const error = ref("")
 const loginExitoso = ref(false)
 
-function iniciarSesion() {
+async function iniciarSesion() {
   isLoading.value = true
   error.value = ""
   loginExitoso.value = false
 
   try {
-    if (usuario.value === "juan" && password.value === "1234") {
+    // validamos contra los usuarios mockeados en Mockachino
+    const usuarioValido = await validarLogin(usuario.value, password.value)
+
+    if (usuarioValido) {
       loginExitoso.value = true
-      localStorage.setItem('isLoggedIn', 'true')
-      router.push('/seleccionPokemon')
+      localStorage.setItem("isLoggedIn", "true")
+      localStorage.setItem("usuario", usuarioValido.first_name)
+      // redirige a la selección de pokemon
+      router.push("/seleccionPokemon")
     } else {
       error.value = "Usuario o contraseña incorrectos."
     }
+  } catch (e) {
+    error.value = "Error al conectar con el servidor: " + e.message
   } finally {
     isLoading.value = false
   }
@@ -30,7 +38,6 @@ function iniciarSesion() {
 function irACrearUsuario() {
   router.push("/crearUsuario")
 }
-
 </script>
 
 <template>

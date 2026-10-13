@@ -4,21 +4,21 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 
 const routes = [
-  {
-    path: '/',
-    component: () => import('../views/loginView.vue'),
-    meta: { title: 'Login' }
-  },
-  {
-    path: '/crearUsuario',
-    component: () => import('../views/crearUsuario.vue'),
-    meta: { title: 'Crear Usuario' }
-  },
-  {
-    path: '/seleccionPokemon',
-    component: () => import('../views/seleccionPokemonView.vue'),
-    meta: { title: 'Seleccionar Pokémon', requiresAuth: true }
-  }
+    {
+        path: '/',
+        component: () => import('../views/loginView.vue'),
+        meta: { title: 'Login' }
+    },
+    {
+        path: '/crearUsuario',
+        component: () => import('../views/crearUsuario.vue'),
+        meta: { title: 'Crear Usuario' }
+    },
+    {
+        path: '/seleccionPokemon',
+        component: () => import('../views/seleccionPokemonView.vue'),
+        meta: { title: 'Seleccionar Pokémon', requiresAuth: true }
+    }
 ]
 
 // el objeto router es el que se va a pasar a la app para que pueda usar las rutas definidas
@@ -26,8 +26,8 @@ const routes = [
 //  y le pasamos el array de rutas y el historial de navegación (createWebHistory)
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: routes
+    history: createWebHistory(),
+    routes: routes
 })
 
 
@@ -37,17 +37,21 @@ const router = createRouter({
 
 router.beforeEach((to) => {
     console.log('Navegando a: ' + to.path)
-    if (to.meta.title) {
-        document.title = to.meta.title        
-    } else {
-        document.title = 'Batallas Pokémon'
-    }
-    const estaLogueado = localStorage.getItem('isLoggedIn') === 'true'
-    if (to.meta.requiresAuth && !estaLogueado) {
-        return('/')
-    }
-   
-       
-    })
 
-    export default router
+    // título de la pestaña
+    document.title = to.meta.title ? to.meta.title : 'Batallas Pokémon'
+
+    const estaLogueado = localStorage.getItem('isLoggedIn') === 'true'
+
+    // si la ruta requiere auth y no está logueado -> al login
+    if (to.meta.requiresAuth && !estaLogueado) {
+        return '/'
+    }
+
+    // si ya está logueado y quiere ir al login -> directo a seleccionar pokemon
+    if (to.path === '/' && estaLogueado) {
+        return '/seleccionPokemon'
+    }
+})
+
+export default router
